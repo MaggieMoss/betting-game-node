@@ -1,5 +1,5 @@
   var prompt = require('sync-prompt').prompt;
-
+  var colors = require('colors');
   var shouldExit = function(command) {
     if(command == 'exit') process.exit();
   }
@@ -16,7 +16,7 @@
     start: function(){
       if(this.money > 1 ){
        var number = Math.floor((Math.random() * 10) + 1);
-       var bet = commandGetter("What is your bet? ");
+       var bet = commandGetter("What is your bet? ".magenta);
        var guess = commandGetter("What is your guess? ");
 
        if(guess !== number) {
@@ -25,22 +25,21 @@
           console.log("Current Balance: " + this.money);
           BettingGame.start();
         } else {
-         console.log("Oops! The number was " + number + "! You lose your bet!");
+         console.log("Oops! The number was ".red + number + "! You lose your bet!".red);
          this.money -= bet
          console.log("Current Balance: " + this.money);
          BettingGame.start();
        };
 
      } else {
-      console.log("Jackpot! You got it! You've doubled your money!");
+      console.log("Jackpot! You got it! You've doubled your money!".green);
       this.money = this.money * 2
       console.log("Current Balance: " + this.money);
       BettingGame.start();
     }
   } else {
-    console.log("Uh-oh. Looks like you're out of cash. Game over.")
+    console.log("Uh-oh. Looks like you're out of cash. Game over.".red)
   }
-  console.log(this.money)
 },
 }
 
